@@ -1,6 +1,4 @@
-﻿using Package_FS_API.Data;
-
-namespace Package_FS_API.Services;
+﻿namespace Package_FS_API.Services;
 
 public class TimeRangeService : ITimeRangeService
 {
@@ -13,9 +11,15 @@ public class TimeRangeService : ITimeRangeService
 
     public async Task<TimeRangeDto> GetAsync()
     {
-        var min = await _dbContext.Instances.MinAsync(x => x.UnixTime);
-        var max = await _dbContext.Instances.MaxAsync(x => x.UnixTime);
+        long min = 0;
+        long max = 0;
 
+        var hasItem = await _dbContext.Positions.AnyAsync();
+        if (hasItem)
+        {
+            min = await _dbContext.Positions.MinAsync(x => x.UnixTime);
+            max = await _dbContext.Positions.MaxAsync(x => x.UnixTime);
+        }
         return TimeRangeDto.Create(min, max);
     }
 }

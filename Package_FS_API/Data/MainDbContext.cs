@@ -1,4 +1,5 @@
-﻿
+﻿using Package_FS_API.Data.Config;
+
 namespace Package_FS_API.Data;
 
 public class MainDbContext : DbContext
@@ -10,10 +11,13 @@ public class MainDbContext : DbContext
 
     public DbSet<Human> Humen { get; set; }
 
-    public DbSet<Position> Instances { get; set; }
+    public DbSet<Position> Positions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfiguration(new HumanConfig());
+        modelBuilder.ApplyConfiguration(new PositionConfig());
     }
 }

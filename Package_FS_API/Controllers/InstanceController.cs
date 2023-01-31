@@ -17,7 +17,15 @@ public class InstanceController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<CountInstanceDto>>> CountInstancesAsync()
     {
-        var result = await _service.CountInstanceAsync();
+        var result = await _service.CountInstancesAsync();
+        return Ok(result);
+    }
+
+    [HttpGet("byPositions")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<PositionInstanceDto>>> PositionInstancesAsync()
+    {
+        var result = await _service.PositionInstancesAsync();
         return Ok(result);
     }
 }

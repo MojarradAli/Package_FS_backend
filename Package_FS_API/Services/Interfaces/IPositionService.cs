@@ -2,5 +2,7 @@
 
 public interface IPositionService
 {
-    Task<IEnumerable<CountInstanceDto>> CountInstanceAsync();
+    Task<IEnumerable<CountInstanceDto>> CountInstancesAsync();
+
+    Task<IEnumerable<PositionInstanceDto>> PositionInstancesAsync();
 }
